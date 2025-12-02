@@ -1,10 +1,18 @@
+extensions:
+  bearertokenauth:
+    token: ${env:OTLP_TOKEN:token}
+    
 receivers:
   otlp:
     protocols:
       grpc:
         endpoint: 0.0.0.0:4317
+        auth:
+          authenticator: bearertokenauth
       http:
         endpoint: 0.0.0.0:4318
+        auth:
+          authenticator: bearertokenauth
   prometheus:
     config:
       scrape_configs:
