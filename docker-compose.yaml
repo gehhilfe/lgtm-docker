@@ -2,8 +2,8 @@ services:
   mimir:
     image: grafana/mimir:2.12.0
     container_name: mimir
-    expose:
-      - 9090
+    #expose:
+    #  - 9090
     restart: unless-stopped
     command: --config.file=/etc/mimir.yaml
     volumes:
@@ -13,8 +13,8 @@ services:
   loki:
     image: grafana/loki:3.1.0
     container_name: loki
-    expose:
-      - 3100
+    #expose:
+    #  - 3100
     command: -config.file=/etc/loki/loki-config.yaml
     volumes:
       - ./services/loki/loki-config.yaml:/etc/loki/loki-config.yaml
