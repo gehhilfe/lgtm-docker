@@ -9,13 +9,13 @@ receivers:
   otlp/with_auth:
     protocols:
       grpc:
-        endpoint: 0.0.0.0:4317
+        endpoint: 0.0.0.0:4318
         auth:
           authenticator: bearertokenauth
   otlphttp/withauth:
-      endpoint: 0.0.0.0:4318
-      auth:
-        authenticator: bearertokenauth
+    endpoint: http://0.0.0.0:4318
+    auth:
+      authenticator: bearertokenauth
   prometheus:
     config:
       scrape_configs:
