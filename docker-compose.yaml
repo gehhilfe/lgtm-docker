@@ -25,7 +25,7 @@ services:
     image: grafana/grafana:11.0.1
     container_name: grafana
     restart: unless-stopped
-    ports:
+    # ports:
       # - ${GRAFANA_PORT}:3000
     environment:
       - GF_SECURITY_ADMIN_USER=${GF_ADMIN_USER}
@@ -58,7 +58,7 @@ services:
     image: otel/opentelemetry-collector:0.104.0
     container_name: otelcol
     # restart: unless-stopped
-    ports:
+    # ports:
       # - ${TEMPO_GRPC_PORT}:4317 # otlp grpc
       # - ${TEMPO_HTTP_PORT}:4318 # otlp http
       # - ${OTEL_MONITORING_PORT}:8888 # monitoring
