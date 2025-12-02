@@ -1,6 +1,6 @@
 extensions:
   bearertokenauth:
-    token: ${env:OTLP_TOKEN:-token}
+    token: ${env:OTLP_TOKEN}
   health_check:
   pprof:
   zpages:
