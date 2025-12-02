@@ -58,9 +58,9 @@ services:
     image: otel/opentelemetry-collector-contrib:0.141.0
     container_name: otelcol
     # restart: unless-stopped
-    ports:
-       - 4317:4317
-       - 4318:4318
+    expose:
+       - 4317
+       - 4318
     command: --config=/etc/otel.yaml
     depends_on:
       - loki
