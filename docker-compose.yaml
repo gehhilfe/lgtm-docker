@@ -55,7 +55,7 @@ services:
     command: -config.file=/etc/promtail/config.yml
 
   otelcol:
-    image: otel/opentelemetry-collector:0.104.0
+    image: otel/opentelemetry-collector-contrib:0.141.0
     container_name: otelcol
     # restart: unless-stopped
     ports:
