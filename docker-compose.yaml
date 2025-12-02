@@ -14,7 +14,7 @@ services:
     image: grafana/loki:3.1.0
     container_name: loki
     expose:
-      - "${LOKI_PORT}:3100"
+      - 3100
     command: -config.file=/etc/loki/loki-config.yaml
     volumes:
       - ./services/loki/loki-config.yaml:/etc/loki/loki-config.yaml
@@ -26,7 +26,7 @@ services:
     container_name: grafana
     restart: unless-stopped
     expose:
-       - ${GRAFANA_PORT}:3000
+       - 3000
     environment:
       - GF_SECURITY_ADMIN_USER=${GF_ADMIN_USER}
       - GF_SECURITY_ADMIN_PASSWORD=${GF_ADMIN_PASSWORD}
@@ -59,9 +59,9 @@ services:
     container_name: otelcol
     # restart: unless-stopped
     expose:
-       - ${TEMPO_GRPC_PORT}:4317 # otlp grpc
-       - ${TEMPO_HTTP_PORT}:4318 # otlp http
-       - ${OTEL_MONITORING_PORT}:8888 # monitoring
+       - 4317 # otlp grpc
+       - 4318 # otlp http
+       - 8888 # monitoring
     command: --config=/etc/otel.yaml
     depends_on:
       - loki
