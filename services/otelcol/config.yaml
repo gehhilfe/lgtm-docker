@@ -6,16 +6,16 @@ extensions:
   zpages:
     
 receivers:
-  otlp/with_auth:
+  otlp:
     protocols:
       grpc:
-        endpoint: 0.0.0.0:4318
+        endpoint: 0.0.0.0:4317
         auth:
           authenticator: bearertokenauth
-  otlphttp/withauth:
-    endpoint: http://0.0.0.0:4318
-    auth:
-      authenticator: bearertokenauth
+      http:
+        auth:
+          authenticator: bearertokenauth
+        endpoint: 0.0.0.0:4318
   prometheus:
     config:
       scrape_configs:
@@ -36,7 +36,7 @@ exporters:
     endpoint: http://mimir:9090/api/v1/push
 
 service:
-  extensions: [health_check, pprof, zpages]
+  extensions: [health_check, pprof, zpages, bearertokenauth]
   pipelines:
     traces:
       receivers: [otlp]
