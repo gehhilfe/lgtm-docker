@@ -44,10 +44,7 @@ services:
     container_name: tempo
     command: ["-config.file=/etc/tempo.yaml"]
     volumes:
-      - type: bind
-        source: ./services/tempo/tempo.yaml
-        target: /etc/tempo.yaml
-        is_directory: false
+      - ./services/tempo/tempo.yaml:/etc/tempo.yaml
 
   ## Tools
   promtail:
