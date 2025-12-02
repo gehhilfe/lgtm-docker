@@ -7,10 +7,7 @@ services:
     restart: unless-stopped
     command: --config.file=/etc/mimir.yaml
     volumes:
-      - type: bind
-        source: ./services/mimir/mimir.yaml
-        target: /etc/mimir.yaml
-        is_directory: false
+      - ./services/mimir/mimir.yaml:/etc/mimir.yaml
       - ./services/mimir/alertmanager.yaml:/etc/alertmanager-fallback-config.yaml
 
   loki:
