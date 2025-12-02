@@ -1,6 +1,9 @@
 extensions:
   bearertokenauth:
     token: ${env:OTLP_TOKEN:token}
+  health_check:
+  pprof:
+  zpages:
     
 receivers:
   otlp:
@@ -31,11 +34,6 @@ exporters:
 
   prometheusremotewrite:
     endpoint: http://mimir:9090/api/v1/push
-
-extensions:
-  health_check:
-  pprof:
-  zpages:
 
 service:
   extensions: [health_check, pprof, zpages]
