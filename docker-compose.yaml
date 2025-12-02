@@ -72,7 +72,4 @@ services:
       - mimir
       - grafana
     volumes:
-      - type: bind
-        source: ./services/otelcol/config.yaml
-        target: /etc/otel.yaml
-        is_directory: false
+      - ./services/otelcol/config.yaml:/etc/otel.yaml
