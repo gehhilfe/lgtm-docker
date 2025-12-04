@@ -62,10 +62,6 @@ services:
        - 4317
        - 4318
     command: --config=/etc/otel.yaml
-    privileged: true
-    user: 0:0
-    cap_add:
-      - ALL
     depends_on:
       - loki
       - tempo
@@ -75,4 +71,3 @@ services:
       - OTLP_TOKEN=${OTLP_TOKEN}
     volumes:
       - ./services/otelcol/config.yaml:/etc/otel.yaml
-      - /:/hostfs:ro

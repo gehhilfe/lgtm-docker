@@ -23,72 +23,8 @@ receivers:
           scrape_interval: 60s
           static_configs:
             - targets: ["localhost:8888"]
-  hostmetrics/agent:
-    # Tell the scrapers to look at the mounted volume, not the container's /
-    root_path: /hostfs
-    collection_interval: 10s
-    scrapers:
-      cpu:
-        metrics:
-          system.cpu.logical.count:
-            enabled: true
-      memory:
-        metrics:
-          system.memory.utilization:
-            enabled: true
-          system.memory.limit:
-            enabled: true
-      load:
-      disk:
-      filesystem:
-        metrics:
-          system.filesystem.utilization:
-            enabled: true
-      network:
-      paging:
-      processes:
-      process:
-        mute_process_user_error: true
-        metrics:
-          process.cpu.utilization:
-            enabled: true
-          process.memory.utilization:
-            enabled: true
-          process.threads:
-            enabled: true
-          process.paging.faults:
-            enabled: true
 processors:
   batch:
-  resource/agent:
-    attributes:
-      - action: upsert
-        key: service.namespace
-        value: agent
-  attributes/agent:
-    actions:
-      - key: service.namespace
-        action: upsert
-        value: agent
-      - key: service.name
-        action: upsert
-        value: otel-collector
-  resourcedetection/system:
-    detectors: ["system"]
-    system:
-      hostname_sources: ["os"]
-  transform:
-    metric_statements:
-      - context: datapoint
-        statements:
-          - set(attributes["host.name"], resource.attributes["host.name"])
-          - set(attributes["process.command"], resource.attributes["process.command"])
-          - set(attributes["process.command_line"], resource.attributes["process.command_line"])
-          - set(attributes["process.executable.name"], resource.attributes["process.executable.name"])
-          - set(attributes["process.executable.path"], resource.attributes["process.executable.path"])
-          - set(attributes["process.owner"], resource.attributes["process.owner"])
-          - set(attributes["process.parent_pid"], resource.attributes["process.parent_pid"])
-          - set(attributes["process.pid"], resource.attributes["process.pid"])
 exporters:
   otlp/tempo:
     endpoint: tempo:4317
@@ -108,8 +44,4 @@ service:
     metrics:
       receivers: [otlp, prometheus]
       processors: [batch]
-      exporters: [prometheusremotewrite]
-    metrics/hostmetrics:
-      receivers: [hostmetrics/agent]
-      processors: [attributes/agent, resourcedetection/system, transform, batch]
       exporters: [prometheusremotewrite]
