@@ -23,6 +23,17 @@ receivers:
           scrape_interval: 60s
           static_configs:
             - targets: ["localhost:8888"]
+  hostmetrics:
+    # Tell the scrapers to look at the mounted volume, not the container's /
+    root_path: /hostfs
+    collection_interval: 1m # Default is 1m, adjust based on resolution needs
+    scrapers:
+      cpu:
+      memory:
+      load:
+      network:
+      disk:
+      filesystem:
 processors:
   batch:
 
@@ -43,6 +54,6 @@ service:
       processors: [batch]
       exporters: [otlp/tempo]
     metrics:
-      receivers: [otlp, prometheus]
+      receivers: [otlp, prometheus,hostmetrics]
       processors: [batch]
       exporters: [prometheusremotewrite]

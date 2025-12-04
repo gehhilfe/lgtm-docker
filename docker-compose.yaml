@@ -71,3 +71,4 @@ services:
       - OTLP_TOKEN=${OTLP_TOKEN}
     volumes:
       - ./services/otelcol/config.yaml:/etc/otel.yaml
+      - /:/hostfs:ro
