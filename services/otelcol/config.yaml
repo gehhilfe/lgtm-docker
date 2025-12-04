@@ -112,4 +112,4 @@ service:
     metrics/hostmetrics:
       receivers: [hostmetrics/agent]
       processors: [attributes/agent, resourcedetection/system, transform, batch]
-      exporters: [otlphttp/mimir]
+      exporters: [prometheusremotewrite]
