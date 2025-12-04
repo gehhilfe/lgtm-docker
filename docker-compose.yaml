@@ -65,7 +65,7 @@ services:
     privileged: true
     user: 0:0
     cap_add:
-      ALL
+      - ALL
     depends_on:
       - loki
       - tempo
