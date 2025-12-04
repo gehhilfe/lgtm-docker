@@ -62,8 +62,10 @@ services:
        - 4317
        - 4318
     command: --config=/etc/otel.yaml
-    cap_add:
-      - CAP_DAC_READ_SEARCH
+    privileged: true
+    capabilities:
+      add:
+        - DAC_READ_SEARCH
     depends_on:
       - loki
       - tempo
